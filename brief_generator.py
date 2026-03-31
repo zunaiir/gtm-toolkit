@@ -93,7 +93,7 @@ CONTEXT:
 Generate a tight, scannable pre-call research brief. Format it exactly like this:
 
 ## {company_name} — Pre-Call Brief
-*{datetime.now().strftime("%B %d, %Y")}*
+*{datetime.now().strftime("%B %d, %Y")} (adjust date if needed)*
 
 ### What They Do
 [2–3 sentences on the company's core business and scale]
