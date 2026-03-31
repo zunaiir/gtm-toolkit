@@ -268,6 +268,94 @@ Rules:
     return message.content[0].text
 
 
+def generate_icp_score(company_name, website_url):
+    """Research a company and score it against Tiger Data's ICP (1-4)."""
+    website_content = fetch_website(website_url)
+    news_content    = fetch_news(company_name)
+
+    context_parts = []
+    if website_content:
+        context_parts.append(f"Website content:\n{website_content}")
+    if news_content:
+        context_parts.append(f"Recent news:\n{news_content}")
+    context = "\n\n".join(context_parts) if context_parts else "No additional context available."
+
+    prompt = f"""You are a sales researcher helping Tiger Data's GTM team decide whether to pursue a prospect.
+
+Tiger Data's Ideal Customer Profile (ICP):
+- Engineering-forward companies with serious data scale challenges
+- Companies running or considering PostgreSQL as part of their stack
+- Industries: fintech, IoT/hardware, SaaS, AI/ML, developer tooling, logistics, healthcare tech
+- Use cases: real-time analytics, time-series data (IoT/telemetry/transactions), vector search, AI-powered apps
+- Company stage: Series B and beyond, or established companies with growing data infrastructure
+- Pain signals: data system sprawl (multiple DBs stitched together), latency issues, engineers maintaining pipelines instead of building, scaling challenges
+
+NOT a good fit:
+- Companies with minimal data workloads
+- Early-stage startups with no data infrastructure yet
+- Companies heavily locked into non-Postgres databases with no migration appetite
+- Pure front-end or content companies with no backend data complexity
+
+---
+COMPANY: {company_name}
+WEBSITE: {website_url or "Not provided"}
+---
+CONTEXT:
+{context}
+
+---
+Research this company and produce an ICP scorecard. Format it exactly like this:
+
+### ICP Score: [1, 2, 3, or 4] / 4
+
+**[One-line verdict — e.g. "Strong fit — pursue now" or "Poor fit — deprioritize"]**
+
+---
+
+### Why This Score
+
+[2–3 sentences explaining the reasoning. Be specific about what signals you found or didn't find.]
+
+---
+
+### ICP Signal Breakdown
+
+**Data Scale** [Strong / Moderate / Weak / Unknown] — [one line explanation]
+**PostgreSQL Fit** [Strong / Moderate / Weak / Unknown] — [one line explanation]
+**Industry Fit** [Strong / Moderate / Weak / Unknown] — [one line explanation]
+**Company Stage** [Strong / Moderate / Weak / Unknown] — [one line explanation]
+**Real-Time / AI Workloads** [Strong / Moderate / Weak / Unknown] — [one line explanation]
+
+---
+
+### Recommended Action
+
+[One of these four, based on the score:]
+- **Score 4:** Prioritize immediately. Add to active pipeline and reach out this week.
+- **Score 3:** Worth pursuing. Research further and add to outbound sequence.
+- **Score 2:** Possible fit. Monitor and revisit when you have more information.
+- **Score 1:** Deprioritize. Move on — better opportunities exist.
+
+---
+
+Scoring guide:
+- 4 = 4–5 strong ICP signals — clear fit, high priority
+- 3 = 3 strong signals or 4–5 moderate ones — good fit, worth pursuing
+- 2 = 1–2 strong signals or mixed signals — possible fit, needs qualification
+- 1 = Few or no ICP signals — poor fit, not worth time right now
+
+Be honest. If a company doesn't fit, say so clearly. A bad lead wastes more time than no lead.
+"""
+
+    client = anthropic.Anthropic()
+    message = client.messages.create(
+        model="claude-opus-4-6",
+        max_tokens=1200,
+        messages=[{"role": "user", "content": prompt}]
+    )
+    return message.content[0].text
+
+
 def parse_email_variations(emails_text):
     """Parse AI email output into a list of (title, subject, body) tuples."""
     variations = []
@@ -403,3 +491,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
