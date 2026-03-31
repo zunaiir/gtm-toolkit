@@ -67,14 +67,14 @@ st.markdown("""
         background-color: #EA6C0A !important;
     }
 
-    /* Download button → black outlined */
-    .stDownloadButton > button {
-        background-color: #000000 !important;
-        color: #FFFFFF !important;
-        border: none !important;
-        border-radius: 6px !important;
-        font-weight: 600 !important;
-    }
+   /* Download button */
+.stDownloadButton > button {
+    background-color: #000000 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+}
     .stDownloadButton > button:hover {
         background-color: #1A1A1A !important;
     }
