@@ -118,7 +118,10 @@ st.markdown("""
 
     /* Force main content text to black */
     .main * { color: #0A0A0A !important; }
-    .stMarkdown, .stMarkdown p, .stMarkdown li { color: #0A0A0A !important; }
+    .stMarkdown, .stMarkdown p, .stMarkdown li,
+    .stMarkdown span, .stMarkdown a,
+    p, li, span, h1, h2, h3, h4 { color: #0A0A0A !important; }
+    code, pre, .stCodeBlock { color: #0A0A0A !important; background-color: #F5F5F5 !important; }
 
     /* Input field labels */
     label, [data-baseweb="form-control-label"],
@@ -313,7 +316,7 @@ elif "Cold Email" in tool:
                     st.code(body, language=None)
 
                     gmail_url   = f"https://mail.google.com/mail/?view=cm&fs=1&to={to}&su={quote(subject)}&body={quote(body)}"
-                    outlook_url = f"https://outlook.live.com/mail/0/deeplink/compose?to={to}&subject={quote(subject)}&body={quote(body)}"
+                    outlook_url = f"https://outlook.office.com/mail/deeplink/compose?to={to}&subject={quote(subject)}&body={quote(body)}"
 
                     col1, col2 = st.columns(2)
                     with col1:
