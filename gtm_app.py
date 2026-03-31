@@ -225,8 +225,8 @@ if "Pre-Call" in tool:
         else:
             try:
                 from brief_generator import generate_brief, save_as_docx
-            except ImportError:
-                st.error("Could not find brief_generator.py — make sure it's in the same folder.")
+            except ImportError as ie:
+                st.error(f"Import error: {ie}")
                 st.stop()
 
             with st.spinner(f"Researching {company_name}..."):
@@ -287,8 +287,8 @@ elif "Cold Email" in tool:
         else:
             try:
                 from brief_generator import generate_cold_emails, parse_email_variations
-            except ImportError:
-                st.error("Could not find brief_generator.py — make sure it's in the same folder.")
+            except ImportError as ie:
+                st.error(f"Import error: {ie}")
                 st.stop()
 
             with st.spinner(f"Writing emails for {company_name}..."):
@@ -352,8 +352,8 @@ elif "CRM" in tool:
         else:
             try:
                 from brief_generator import generate_crm_summary
-            except ImportError:
-                st.error("Could not find brief_generator.py — make sure it's in the same folder.")
+            except ImportError as ie:
+                st.error(f"Import error: {ie}")
                 st.stop()
 
             with st.spinner("Generating CRM summary..."):
@@ -415,8 +415,8 @@ elif "ICP" in tool:
         else:
             try:
                 from brief_generator import generate_icp_score
-            except ImportError:
-                st.error("Could not find brief_generator.py — make sure it's in the same folder.")
+            except ImportError as ie:
+                st.error(f"Import error: {ie}")
                 st.stop()
 
             with st.spinner(f"Researching {company_name}..."):
