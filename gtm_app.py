@@ -207,7 +207,7 @@ if "Pre-Call" in tool:
     st.markdown('<p class="tagline">Get an AI-generated research brief before any discovery call.</p>', unsafe_allow_html=True)
 
     with st.form("brief_form"):
-        company_name = st.text_input("Company name *", placeholder="e.g. Stripe")
+        company_name = st.text_input("Company name", placeholder="e.g. Stripe")
         website_url  = st.text_input("Website URL",    placeholder="e.g. https://stripe.com")
 
         col1, col2 = st.columns(2)
@@ -261,7 +261,7 @@ elif "Cold Email" in tool:
     st.markdown('<p class="tagline">Generate 3 personalized cold email variations for any prospect.</p>', unsafe_allow_html=True)
 
     with st.form("email_form"):
-        company_name   = st.text_input("Company name *",   placeholder="e.g. Samsara")
+        company_name   = st.text_input("Company name",   placeholder="e.g. Samsara")
         website_url    = st.text_input("Website URL",       placeholder="e.g. https://samsara.com")
 
         col1, col2 = st.columns(2)
@@ -330,7 +330,7 @@ elif "CRM" in tool:
 
     with st.form("crm_form"):
         call_notes = st.text_area(
-            "Call notes *",
+            "Call notes",
             placeholder="Paste your raw call notes or transcript here...",
             height=200
         )
