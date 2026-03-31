@@ -191,6 +191,7 @@ tool = st.sidebar.radio(
         "📋  Pre-Call Research Brief",
         "✉️  Cold Email Writer",
         "📝  Call Notes → CRM Summary",
+        "🎯  ICP Scorer",
     ],
     label_visibility="collapsed"
 )
@@ -207,7 +208,7 @@ if "Pre-Call" in tool:
     st.markdown('<p class="tagline">Get an AI-generated research brief before any discovery call.</p>', unsafe_allow_html=True)
 
     with st.form("brief_form"):
-        company_name = st.text_input("Company name", placeholder="e.g. Stripe")
+        company_name = st.text_input("Company name *", placeholder="e.g. Stripe")
         website_url  = st.text_input("Website URL",    placeholder="e.g. https://stripe.com")
 
         col1, col2 = st.columns(2)
@@ -261,7 +262,7 @@ elif "Cold Email" in tool:
     st.markdown('<p class="tagline">Generate 3 personalized cold email variations for any prospect.</p>', unsafe_allow_html=True)
 
     with st.form("email_form"):
-        company_name   = st.text_input("Company name",   placeholder="e.g. Samsara")
+        company_name   = st.text_input("Company name *",   placeholder="e.g. Samsara")
         website_url    = st.text_input("Website URL",       placeholder="e.g. https://samsara.com")
 
         col1, col2 = st.columns(2)
@@ -330,7 +331,7 @@ elif "CRM" in tool:
 
     with st.form("crm_form"):
         call_notes = st.text_area(
-            "Call notes",
+            "Call notes *",
             placeholder="Paste your raw call notes or transcript here...",
             height=200
         )
@@ -395,4 +396,54 @@ elif "CRM" in tool:
             with col2:
                 st.link_button("Open in Salesforce →", "https://login.salesforce.com", use_container_width=True)
 
+            st.divider()
+
+# ─── Tool: ICP Scorer ─────────────────────────────────────────────────────────
+
+elif "ICP" in tool:
+    st.title("🎯 ICP Scorer")
+    st.markdown('<p class="tagline">Find out if a company is worth your time before you spend it.</p>', unsafe_allow_html=True)
+
+    with st.form("icp_form"):
+        company_name = st.text_input("Company name *", placeholder="e.g. Samsara")
+        website_url  = st.text_input("Website URL",    placeholder="e.g. https://samsara.com")
+        submitted    = st.form_submit_button("Score This Account →", use_container_width=True, type="primary")
+
+    if submitted:
+        if not company_name.strip():
+            st.error("Company name is required.")
+        else:
+            try:
+                from brief_generator import generate_icp_score
+            except ImportError:
+                st.error("Could not find brief_generator.py — make sure it's in the same folder.")
+                st.stop()
+
+            with st.spinner(f"Researching {company_name}..."):
+                try:
+                    result = generate_icp_score(company_name, website_url)
+                except Exception as e:
+                    st.error(f"Something went wrong: {e}")
+                    st.stop()
+
+            st.divider()
+
+            # Pull out score number for colour-coded badge
+            import re as _re
+            score_match = _re.search(r'ICP Score:\s*([1-4])', result)
+            if score_match:
+                score = int(score_match.group(1))
+                colours = {1: "#EF4444", 2: "#F97316", 3: "#3B82F6", 4: "#22C55E"}
+                labels  = {1: "Poor Fit", 2: "Possible Fit", 3: "Good Fit", 4: "Strong Fit"}
+                colour  = colours[score]
+                label   = labels[score]
+                st.markdown(
+                    f'<div style="display:inline-block; background:{colour}; color:white; '
+                    f'font-size:1.4rem; font-weight:700; padding:0.5rem 1.25rem; '
+                    f'border-radius:8px; margin-bottom:1rem;">'
+                    f'{score} / 4 — {label}</div>',
+                    unsafe_allow_html=True
+                )
+
+            st.markdown(result)
             st.divider()
