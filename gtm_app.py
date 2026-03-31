@@ -120,6 +120,15 @@ st.markdown("""
     .main * { color: #0A0A0A !important; }
     .stMarkdown, .stMarkdown p, .stMarkdown li { color: #0A0A0A !important; }
 
+    /* Input field labels */
+    label, [data-baseweb="form-control-label"],
+    .stTextInput label, .stTextArea label,
+    [data-testid="stTextInput"] label,
+    [data-testid="stTextArea"] label {
+        color: #0A0A0A !important;
+        font-weight: 500 !important;
+    }
+
     /* Expander label — white text on dark background */
     [data-testid="stExpander"] summary,
     [data-testid="stExpander"] summary p,
