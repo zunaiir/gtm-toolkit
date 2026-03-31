@@ -405,7 +405,7 @@ elif "ICP" in tool:
     st.markdown('<p class="tagline">Find out if a company is worth your time before you spend it.</p>', unsafe_allow_html=True)
 
     with st.form("icp_form"):
-        company_name = st.text_input("Company name *", placeholder="e.g. Samsara")
+        company_name = st.text_input("Company name", placeholder="e.g. Samsara")
         website_url  = st.text_input("Website URL",    placeholder="e.g. https://samsara.com")
         submitted    = st.form_submit_button("Score This Account →", use_container_width=True, type="primary")
 
