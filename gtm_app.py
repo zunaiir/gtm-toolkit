@@ -123,6 +123,15 @@ st.markdown("""
     p, li, span, h1, h2, h3, h4 { color: #0A0A0A !important; }
     code, pre, .stCodeBlock { color: #0A0A0A !important; background-color: #F5F5F5 !important; }
 
+    /* Keep sidebar text white — overrides the black rule above */
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] li,
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3,
+    [data-testid="stSidebar"] * { color: #FFFFFF !important; }
+
     /* Input field labels */
     label, [data-baseweb="form-control-label"],
     .stTextInput label, .stTextArea label,
@@ -185,7 +194,7 @@ else:
     st.sidebar.markdown("## 🐯")
 
 st.sidebar.markdown("### Tiger Data")
-st.sidebar.markdown("<span style='color:#A3A3A3; font-size:0.8rem;'>GTM Toolkit · Internal use only</span>", unsafe_allow_html=True)
+st.sidebar.markdown("<span style='color:#FFFFFF; font-size:0.8rem;'>GTM Toolkit · Internal use only</span>", unsafe_allow_html=True)
 st.sidebar.divider()
 
 tool = st.sidebar.radio(
@@ -200,8 +209,8 @@ tool = st.sidebar.radio(
 )
 
 st.sidebar.divider()
-st.sidebar.markdown("<span style='color:#525252; font-size:0.75rem;'>Powered by Claude AI</span>", unsafe_allow_html=True)
-st.sidebar.markdown("<span style='color:#525252; font-size:0.75rem;'>© Tiger Data · Confidential</span>", unsafe_allow_html=True)
+st.sidebar.markdown("<span style='color:#FFFFFF; font-size:0.75rem;'>Powered by Claude AI</span>", unsafe_allow_html=True)
+st.sidebar.markdown("<span style='color:#FFFFFF; font-size:0.75rem;'>© Tiger Data · Confidential</span>", unsafe_allow_html=True)
 
 # ─── Tool: Pre-Call Research Brief ───────────────────────────────────────────
 
