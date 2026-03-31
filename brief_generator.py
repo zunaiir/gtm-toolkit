@@ -319,11 +319,11 @@ Research this company and produce an ICP scorecard. Format it exactly like this:
 
 ### ICP Signal Breakdown
 
-**Data Scale** [Strong / Moderate / Weak / Unknown] — [one line explanation]
-**PostgreSQL Fit** [Strong / Moderate / Weak / Unknown] — [one line explanation]
-**Industry Fit** [Strong / Moderate / Weak / Unknown] — [one line explanation]
-**Company Stage** [Strong / Moderate / Weak / Unknown] — [one line explanation]
-**Real-Time / AI Workloads** [Strong / Moderate / Weak / Unknown] — [one line explanation]
+- **Data Scale:** [Strong / Moderate / Weak / Unknown] — [one line explanation]
+- **PostgreSQL Fit:** [Strong / Moderate / Weak / Unknown] — [one line explanation]
+- **Industry Fit:** [Strong / Moderate / Weak / Unknown] — [one line explanation]
+- **Company Stage:** [Strong / Moderate / Weak / Unknown] — [one line explanation]
+- **Real-Time / AI Workloads:** [Strong / Moderate / Weak / Unknown] — [one line explanation]
 
 ---
 
