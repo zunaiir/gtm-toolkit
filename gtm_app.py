@@ -67,10 +67,11 @@ st.markdown("""
         background-color: #EA6C0A !important;
     }
 
-   /* Download button */
-.stDownloadButton > button {
+/* Download button */
+.stDownloadButton > button,
+.stDownloadButton > button * {
     background-color: #000000 !important;
-    color: white !important;
+    color: #FFFFFF !important;
     border: none !important;
     border-radius: 6px !important;
     font-weight: 600 !important;
